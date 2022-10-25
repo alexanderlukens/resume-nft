@@ -1,14 +1,14 @@
 [features]
 seeds = false
 skip-lint = false
-[programs.localnet]
+[programs.devnet]
 resume_nft = "7dGW6wNb8PjvBXazgTjWUAPoZJfU8aeDXsJW6xkETQDE"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "/Users/alexlukens/.config/solana/id.json"
 
 [scripts]
