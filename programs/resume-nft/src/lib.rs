@@ -27,6 +27,18 @@ pub mod resume_nft {
             &ctx.accounts.token_program.key(),
         )?;
         // initialize mint account
+        token::initialize_mint(
+            CpiContext::new(
+                ctx.accounts.token_program.to_account_info(),
+                token::InitializeMint {
+                    mint: ctx.accounts.token_program.to_account_info(),
+                    rent: ctx.accounts.rent.to_account_info(),
+                },
+            ),
+            0,
+            &ctx.accounts.mint_authority.key(),
+            Some(&ctx.accounts.mint_authority.key()),
+        )?;
         // create token account
         // mint token to token account
         // create metadata account
