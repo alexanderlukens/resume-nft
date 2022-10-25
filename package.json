@@ -1,7 +1,8 @@
 {
     "scripts": {
         "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
-        "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+        "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+        "deploy-fe": "npm --prefix app/ run deploy"
     },
     "dependencies": {
         "@project-serum/anchor": "^0.25.0"
