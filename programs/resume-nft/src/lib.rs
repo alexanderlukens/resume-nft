@@ -12,12 +12,7 @@ declare_id!("7dGW6wNb8PjvBXazgTjWUAPoZJfU8aeDXsJW6xkETQDE");
 pub mod resume_nft {
     use super::*;
 
-    pub fn mint(
-        ctx: Context<MintNft>,
-        metadata_title: String,
-        metadata_symbol: String,
-        metadata_uri: String,
-    ) -> Result<()> {
+    pub fn mint(ctx: Context<MintNft>) -> Result<()> {
         // create mint account
         system_program::create_account(
             CpiContext::new(
@@ -78,9 +73,9 @@ pub mod resume_nft {
                 ctx.accounts.mint_authority.key(),
                 ctx.accounts.mint_authority.key(),
                 ctx.accounts.mint_authority.key(),
-                metadata_title,
-                metadata_symbol,
-                metadata_uri,
+                "Alex Lukens' Resume".to_string(),
+                "ALEXLUKENS".to_string(),
+                "https://raw.githubusercontent.com/alexanderlukens/resume-nft/main/assets/resume.json".to_string(),
                 None,
                 1,
                 true,

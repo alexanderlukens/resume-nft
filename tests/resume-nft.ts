@@ -5,10 +5,6 @@ import { ResumeNft } from "../target/types/resume_nft";
 describe("resume-nft", () => {
   // Configure the client to use the local cluster.
 
-  const nftTitle = "Alex's Resume";
-  const nftSymbol = "ALEXLUKENS";
-  const nftMetadataUrl = "https://raw.githubusercontent.com/alexanderlukens/resume-nft/main/assets/resume.json";
-
   const provider = anchor.AnchorProvider.env()
   const wallet = provider.wallet as anchor.Wallet;
   anchor.setProvider(provider);
@@ -45,7 +41,7 @@ describe("resume-nft", () => {
     ))[0];
 
 
-    const tx = await program.methods.mint(nftTitle, nftSymbol, nftMetadataUrl)
+    const tx = await program.methods.mint()
       .accounts({
         masterEdition: masterEditionAddress,
         metadata: metadataAddress,

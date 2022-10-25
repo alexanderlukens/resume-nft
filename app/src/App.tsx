@@ -1,12 +1,10 @@
 import React from 'react';
+import Container from '@mui/material/Container';
 
 function App() {
   return (
-    <div className="App">
+    <Container maxWidth="lg">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -16,7 +14,7 @@ function App() {
           THIS IS THE RESUME APP
         </a>
       </header>
-    </div>
+    </Container>
   );
 }
 
