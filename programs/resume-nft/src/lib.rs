@@ -53,6 +53,17 @@ pub mod resume_nft {
             },
         ))?;
         // mint token to token account
+        token::mint_to(
+            CpiContext::new(
+                ctx.accounts.token_program.to_account_info(),
+                token::MintTo {
+                    mint: ctx.accounts.mint.to_account_info(),
+                    to: ctx.accounts.token_account.to_account_info(),
+                    authority: ctx.accounts.mint_authority.to_account_info(),
+                },
+            ),
+            1,
+        )?;
         // create metadata account
         // create master edition account
 
