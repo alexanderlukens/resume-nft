@@ -13,6 +13,13 @@ pub mod resume_nft {
     use super::*;
 
     pub fn mint(ctx: Context<MintNft>) -> Result<()> {
+        // create mint account
+        // initialize mint account
+        // create token account
+        // mint token to token account
+        // create metadata account
+        // create master edition account
+
         Ok(())
     }
 }
