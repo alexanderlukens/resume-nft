@@ -12,7 +12,12 @@ declare_id!("7dGW6wNb8PjvBXazgTjWUAPoZJfU8aeDXsJW6xkETQDE");
 pub mod resume_nft {
     use super::*;
 
-    pub fn mint(ctx: Context<MintNft>) -> Result<()> {
+    pub fn mint(
+        ctx: Context<MintNft>,
+        metadata_title: String,
+        metadata_symbol: String,
+        metadata_uri: String,
+    ) -> Result<()> {
         // create mint account
         system_program::create_account(
             CpiContext::new(
@@ -65,6 +70,32 @@ pub mod resume_nft {
             1,
         )?;
         // create metadata account
+        invoke(
+            &token_instruction::create_metadata_accounts_v3(
+                MPL_TOKEN_METADATA_ID,
+                ctx.accounts.metadata.key(),
+                ctx.accounts.mint.key(),
+                ctx.accounts.mint_authority.key(),
+                ctx.accounts.mint_authority.key(),
+                ctx.accounts.mint_authority.key(),
+                metadata_title,
+                metadata_symbol,
+                metadata_uri,
+                None,
+                1,
+                true,
+                true,
+                None,
+                None,
+                None,
+            ),
+            &[
+                ctx.accounts.metadata.to_account_info(),
+                ctx.accounts.mint.to_account_info(),
+                ctx.accounts.token_account.to_account_info(),
+                ctx.accounts.mint_authority.to_account_info(),
+            ],
+        )?;
         // create master edition account
 
         Ok(())
