@@ -14,6 +14,18 @@ pub mod resume_nft {
 
     pub fn mint(ctx: Context<MintNft>) -> Result<()> {
         // create mint account
+        system_program::create_account(
+            CpiContext::new(
+                ctx.accounts.token_program.to_account_info(),
+                system_program::CreateAccount {
+                    from: ctx.accounts.mint_authority.to_account_info(),
+                    to: ctx.accounts.mint.to_account_info(),
+                },
+            ),
+            1000000000,
+            82,
+            &ctx.accounts.token_program.key(),
+        )?;
         // initialize mint account
         // create token account
         // mint token to token account
