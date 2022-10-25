@@ -2,7 +2,7 @@
 seeds = false
 skip-lint = false
 [programs.localnet]
-resume_nft = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+resume_nft = "7dGW6wNb8PjvBXazgTjWUAPoZJfU8aeDXsJW6xkETQDE"
 
 [registry]
 url = "https://api.apr.dev"
