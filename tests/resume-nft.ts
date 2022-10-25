@@ -6,11 +6,15 @@ describe("resume-nft", () => {
   // Configure the client to use the local cluster.
   anchor.setProvider(anchor.AnchorProvider.env());
 
+  const nftTitle = "Alex's Resume";
+  const nftSymbol = "ALEXLUKENS";
+  const nftUri = "";
+
   const program = anchor.workspace.ResumeNft as Program<ResumeNft>;
 
   it("Is initialized!", async () => {
     // Add your test here.
-    const tx = await program.methods.initialize().rpc();
+    const tx = await program.methods.mint().rpc();
     console.log("Your transaction signature", tx);
   });
 });
