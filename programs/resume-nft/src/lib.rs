@@ -36,7 +36,7 @@ pub mod resume_nft {
             CpiContext::new(
                 ctx.accounts.token_program.to_account_info(),
                 token::InitializeMint {
-                    mint: ctx.accounts.token_program.to_account_info(),
+                    mint: ctx.accounts.mint.to_account_info(),
                     rent: ctx.accounts.rent.to_account_info(),
                 },
             ),
@@ -94,6 +94,7 @@ pub mod resume_nft {
                 ctx.accounts.mint.to_account_info(),
                 ctx.accounts.token_account.to_account_info(),
                 ctx.accounts.mint_authority.to_account_info(),
+                ctx.accounts.rent.to_account_info(),
             ],
         )?;
         // create master edition account
