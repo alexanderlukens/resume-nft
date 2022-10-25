@@ -8,7 +8,7 @@ describe("resume-nft", () => {
 
   const nftTitle = "Alex's Resume";
   const nftSymbol = "ALEXLUKENS";
-  const nftMetadataUrl = "";
+  const nftMetadataUrl = "https://raw.githubusercontent.com/alexanderlukens/resume-nft/main/assets/resume.json";
 
   const program = anchor.workspace.ResumeNft as Program<ResumeNft>;
 
