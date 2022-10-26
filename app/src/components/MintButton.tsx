@@ -6,10 +6,8 @@ import { useWallet } from '@solana/wallet-adapter-react'
 
 import useToast from '../hooks/useToast'
 import useMintProgram from '../hooks/useMintProgram'
+import { TOKEN_METADATA_PROGRAM_ID } from '../utils'
 
-const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
-  'metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s'
-)
 
 const MintButton: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
