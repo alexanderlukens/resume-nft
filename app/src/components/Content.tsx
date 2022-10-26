@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid'
 import { useWallet } from '@solana/wallet-adapter-react'
 
 import AirdropButton from './AirdropButton'
+import MintButton from './MintButton'
 
 const Content: FC = () => {
   const wallet = useWallet()
@@ -31,6 +32,9 @@ const Content: FC = () => {
     <Grid container alignItems="center" justifyContent="center">
       <Grid item>
         <AirdropButton />
+      </Grid>
+      <Grid item>
+        <MintButton />
       </Grid>
     </Grid>
   )
