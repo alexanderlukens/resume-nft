@@ -5,11 +5,13 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
 import useToast from '../hooks/useToast'
+import useMintProgram from '../hooks/useMintProgram'
 
 const MintButton: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const { connection } = useConnection()
   const wallet = useWallet()
+  const mintProgram = useMintProgram()
 
   const { showSuccessToast, showErrorToast } = useToast()
 
