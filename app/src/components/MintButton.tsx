@@ -2,16 +2,13 @@
 import { FC, useState } from 'react'
 import * as anchor from '@project-serum/anchor'
 import Button from '@mui/material/Button'
-import { useWallet } from '@solana/wallet-adapter-react'
 
 import useToast from '../hooks/useToast'
 import useMintProgram from '../hooks/useMintProgram'
 import { TOKEN_METADATA_PROGRAM_ID } from '../utils'
 
-
 const MintButton: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
-  const wallet = useWallet()
   const mintProgram = useMintProgram()
 
   const { showSuccessToast, showErrorToast } = useToast()
@@ -21,13 +18,13 @@ const MintButton: FC = () => {
   }
 
   const onClick = async (): Promise<void> => {
-    if (wallet.publicKey) {
+    if (mintProgram.provider.publicKey) {
       setLoading(true)
       try {
         const mintKeypair: anchor.web3.Keypair = anchor.web3.Keypair.generate()
         const tokenAddress = await anchor.utils.token.associatedAddress({
           mint: mintKeypair.publicKey,
-          owner: wallet.publicKey
+          owner: mintProgram.provider.publicKey
         })
 
         const metadataAddress = (await anchor.web3.PublicKey.findProgramAddress(
@@ -55,7 +52,7 @@ const MintButton: FC = () => {
             metadata: metadataAddress,
             mint: mintKeypair.publicKey,
             tokenAccount: tokenAddress,
-            mintAuthority: wallet.publicKey,
+            mintAuthority: mintProgram.provider.publicKey,
             tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID
           })
           .signers([mintKeypair])
