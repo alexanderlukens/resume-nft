@@ -7,7 +7,7 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 const Header: FC = () => {
   return (
-    <AppBar color="secondary">
+    <AppBar color="secondary" position="static">
       <Grid container alignItems="center" justifyContent={'space-between'} p={1}>
         <Grid item>
           <Button variant='contained' href="https://alexanderlukens.github.io/">Back to Portfolio</Button>
