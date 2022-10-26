@@ -3,6 +3,8 @@ import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 import { useWallet } from '@solana/wallet-adapter-react'
 
+import AirdropButton from './AirdropButton'
+
 const Content: FC = () => {
   const wallet = useWallet()
   const { connected, connecting } = wallet
@@ -28,7 +30,7 @@ const Content: FC = () => {
   return (
     <Grid container alignItems="center" justifyContent="center">
       <Grid item>
-        HelloWorld
+        <AirdropButton />
       </Grid>
     </Grid>
   )
