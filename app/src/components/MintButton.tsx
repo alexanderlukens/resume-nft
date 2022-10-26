@@ -25,7 +25,6 @@ const MintButton: FC = () => {
       setLoading(false)
     }
   }
-
   return (
     <Button disabled={loading} onClick={onClick}>
       Mint

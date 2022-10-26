@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { FC, useState } from 'react'
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { FC, useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
@@ -8,6 +9,7 @@ import useToast from '../hooks/useToast'
 
 const AirdropButton: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
+  const [solBalance, setSolBalance] = useState<number>(0)
   const { connection } = useConnection()
   const wallet = useWallet()
 
@@ -18,6 +20,7 @@ const AirdropButton: FC = () => {
       setLoading(true)
       try {
         await connection.requestAirdrop(wallet.publicKey, 2 * LAMPORTS_PER_SOL)
+        await updateBalance()
         showSuccessToast('Airdrop Successful')
       } catch (e) {
         showErrorToast('Airdrop Failure. Please try again later.')
@@ -26,9 +29,21 @@ const AirdropButton: FC = () => {
     }
   }
 
+  const updateBalance = async (): Promise<void> => {
+    if (wallet.publicKey) {
+      let balance = await connection.getBalance(wallet.publicKey, 'processed')
+      balance = (Math.round(balance / LAMPORTS_PER_SOL * 100) / 100)
+      setSolBalance(balance)
+    }
+  }
+
+  useEffect(() => {
+    updateBalance()
+  }, [])
+
   return (
     <Button disabled={loading} onClick={onClick}>
-      Airdrop 2 Sol
+      Airdrop 2 Sol {solBalance}
     </Button>
   )
 }
