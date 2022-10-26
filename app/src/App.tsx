@@ -1,9 +1,9 @@
-import React from 'react';
-import Container from '@mui/material/Container';
+import React, { FC } from 'react'
+import Container from '@mui/material/Container'
 
-import { WalletContext } from './contexts/WalletContext';
+import { WalletContext } from './contexts/WalletContext'
 
-function App() {
+const App: FC = () => {
   return (
     <WalletContext>
       <Container maxWidth="lg">
@@ -19,7 +19,7 @@ function App() {
         </header>
       </Container>
     </WalletContext>
-  );
+  )
 }
 
-export default App;
+export default App
