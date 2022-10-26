@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { FC, useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
@@ -20,7 +21,7 @@ const AirdropButton: FC = () => {
       setLoading(true)
       try {
         await connection.requestAirdrop(wallet.publicKey, 2 * LAMPORTS_PER_SOL)
-        await updateBalance()
+        setSolBalance(solBalance + 2)
         showSuccessToast('Airdrop Successful')
       } catch (e) {
         showErrorToast('Airdrop Failure. Please try again later.')
@@ -42,9 +43,12 @@ const AirdropButton: FC = () => {
   }, [])
 
   return (
-    <Button disabled={loading} onClick={onClick}>
-      Airdrop 2 Sol {solBalance}
-    </Button>
+    <>
+      <Button disabled={loading} onClick={onClick}>
+        Airdrop 2 Sol
+      </Button>
+      <Typography>{solBalance} SOL</Typography>
+    </>
   )
 }
 
