@@ -2,11 +2,13 @@ import { FC, ReactNode, useCallback, useMemo } from 'react'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { WalletAdapterNetwork, WalletError } from '@solana/wallet-adapter-base'
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets'
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { clusterApiUrl } from '@solana/web3.js'
+require('@solana/wallet-adapter-react-ui/styles.css')
 
 export const WalletContext: FC<{ children: ReactNode }> = ({ children }) => {
   const network = WalletAdapterNetwork.Devnet
-  const endpoint = clusterApiUrl(network)
+  const endpoint = useMemo(() => clusterApiUrl(network), [network])
 
   const wallets = useMemo(
     () => [
@@ -26,7 +28,9 @@ export const WalletContext: FC<{ children: ReactNode }> = ({ children }) => {
       config={{ confirmTransactionInitialTimeout: 240000 }}
     >
       <WalletProvider wallets={wallets} onError={onError} autoConnect>
-        {children}
+        <WalletModalProvider>
+          {children}
+        </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
   )

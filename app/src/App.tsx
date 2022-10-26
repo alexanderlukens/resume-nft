@@ -1,22 +1,14 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import Container from '@mui/material/Container'
 
 import { WalletContext } from './contexts/WalletContext'
+import Home from './components/Home'
 
 const App: FC = () => {
   return (
     <WalletContext>
       <Container maxWidth="lg">
-        <header className="App-header">
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            THIS IS THE RESUME APP
-          </a>
-        </header>
+        <Home />
       </Container>
     </WalletContext>
   )
