@@ -1,5 +1,4 @@
-import React, { FC } from 'react'
-import Box from '@mui/material/Box'
+import { FC } from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
 import { useWallet } from '@solana/wallet-adapter-react'
@@ -10,19 +9,15 @@ const Content: FC = () => {
 
   if (connecting) {
     return (
-      <Box>
-        <Grid container alignItems="center" justifyContent="center" sx={{ height: '100%' }}>
-          <Grid item>
-            <CircularProgress />
-          </Grid>
-        </Grid>
-      </Box>
+      <Grid container alignItems="center" justifyContent="center">
+        <CircularProgress />
+      </Grid>
     )
   }
 
   if (!connected) {
     return (
-      <Grid container>
+      <Grid container alignItems="center" justifyContent="center">
         <Grid item>
           Please connect wallet to continue
         </Grid>
@@ -31,13 +26,11 @@ const Content: FC = () => {
   }
 
   return (
-    <Box>
-      <Grid container alignItems="center" justifyContent="center">
-        <Grid item>
-          Hello World
-        </Grid>
+    <Grid container alignItems="center" justifyContent="center">
+      <Grid item>
+        HelloWorld
       </Grid>
-    </Box>
+    </Grid>
   )
 }
 
