@@ -2,13 +2,13 @@ import { FC } from 'react'
 import Container from '@mui/material/Container'
 
 import { WalletContext } from './contexts/WalletContext'
-import Home from './components/Home'
+import Index from './components/Index'
 
 const App: FC = () => {
   return (
     <WalletContext>
       <Container maxWidth="lg">
-        <Home />
+        <Index />
       </Container>
     </WalletContext>
   )
