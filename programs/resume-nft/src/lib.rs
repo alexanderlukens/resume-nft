@@ -71,14 +71,14 @@ pub mod resume_nft {
         // create metadata account
         let creator = Creator {
             address: constants::CREATOR_PUB_KEY,
-            verified: true,
+            verified: false,
             share: 100,
         };
 
-        require!(
-            ctx.accounts.update_authority.key() == constants::CREATOR_PUB_KEY,
-            errors::MintingError::InvalidCreator
-        );
+        // require!(
+        //     ctx.accounts.update_authority.key() == constants::CREATOR_PUB_KEY,
+        //     errors::MintingError::InvalidCreator
+        // );
 
         invoke(
             &token_instruction::create_metadata_accounts_v3(
@@ -87,7 +87,7 @@ pub mod resume_nft {
                 ctx.accounts.mint.key(),
                 ctx.accounts.mint_authority.key(),
                 ctx.accounts.mint_authority.key(),
-                constants::CREATOR_PUB_KEY,
+                ctx.accounts.mint_authority.key(),
                 "Alex Lukens' Resume".to_string(),
                 "ALEXLUKENS".to_string(),
                 "https://raw.githubusercontent.com/alexanderlukens/resume-nft/main/assets/resume.json".to_string(),
@@ -148,8 +148,6 @@ pub struct MintNft<'info> {
     pub token_account: UncheckedAccount<'info>,
     #[account(mut)]
     pub mint_authority: Signer<'info>,
-    #[account(mut)]
-    pub update_authority: Signer<'info>,
 
     pub rent: Sysvar<'info, Rent>,
     pub system_program: Program<'info, System>,
