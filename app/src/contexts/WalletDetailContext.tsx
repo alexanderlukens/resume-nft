@@ -6,9 +6,16 @@ import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 export interface WalletDetailInterface {
   balance: number
   updateBalance: () => Promise<void>
+  updateNfts: () => Promise<void>
 }
 
-const initialContext: WalletDetailInterface = { balance: 0, updateBalance: () => { throw new Error('Update balance is not avaliable') } }
+const initialContext: WalletDetailInterface = {
+  balance: 0,
+  updateBalance: () => {
+    throw new Error('Update balance is not avaliable')
+  },
+  updateNfts: () => { throw new Error('Update NFTs is not avaliable') }
+}
 const WalletDetailContext = React.createContext<WalletDetailInterface>(initialContext)
 
 interface Props {
@@ -17,6 +24,7 @@ interface Props {
 
 const WalletDetailContextProvider: React.FC<Props> = ({ children }) => {
   const [balance, setBalance] = useState(0)
+  // const [nfts, setNfts] = useState(0)
   const { connection } = useConnection()
   const wallet = useWallet() || {}
 
@@ -28,12 +36,19 @@ const WalletDetailContextProvider: React.FC<Props> = ({ children }) => {
     }
   }
 
+  const updateNfts = async (): Promise<void> => {
+    if (wallet.publicKey) {
+      console.log('alex')
+    }
+  }
+
   useEffect(() => {
     updateBalance()
+    updateNfts()
   }, [wallet])
 
   return (
-    <WalletDetailContext.Provider value={{ balance, updateBalance }}>
+    <WalletDetailContext.Provider value={{ balance, updateBalance, updateNfts }}>
       {children}
     </WalletDetailContext.Provider>
   )

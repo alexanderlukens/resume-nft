@@ -5,6 +5,7 @@ import { useWallet } from '@solana/wallet-adapter-react'
 
 import AirdropButton from './AirdropButton'
 import MintButton from './MintButton'
+import NFTDisplay from './NFTDisplay'
 
 const Content: FC = () => {
   const wallet = useWallet()
@@ -29,12 +30,15 @@ const Content: FC = () => {
   }
 
   return (
-    <Grid container alignItems="center" justifyContent="center">
+    <Grid container justifyContent="space-between">
       <Grid item>
         <AirdropButton />
       </Grid>
       <Grid item>
         <MintButton />
+      </Grid>
+      <Grid item xs={12}>
+        <NFTDisplay />
       </Grid>
     </Grid>
   )
