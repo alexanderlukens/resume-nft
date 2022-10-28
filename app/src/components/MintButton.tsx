@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useState } from 'react'
 import * as anchor from '@project-serum/anchor'
-import Button from '@mui/material/Button'
+import LoadingButton from '@mui/lab/LoadingButton'
 
 import useToast from '../hooks/useToast'
 import useConfirmTransaction from '../hooks/useConfirmTransaction'
@@ -74,9 +74,13 @@ const MintButton: FC = () => {
     }
   }
   return (
-    <Button disabled={loading} onClick={onClick}>
+    <LoadingButton
+      disabled={loading}
+      loading={loading}
+      onClick={onClick}
+      variant="outlined">
       Mint
-    </Button>
+    </LoadingButton>
   )
 }
 
