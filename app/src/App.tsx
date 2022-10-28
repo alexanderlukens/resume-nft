@@ -5,11 +5,11 @@ import Index from './components/Index'
 
 const App: FC = () => {
   return (
-    <WalletDetailContextProvider>
-      <WalletConnectionContextProvider>
+    <WalletConnectionContextProvider>
+      <WalletDetailContextProvider>
         <Index />
-      </WalletConnectionContextProvider>
-    </WalletDetailContextProvider>
+      </WalletDetailContextProvider>
+    </WalletConnectionContextProvider>
   )
 }
 
