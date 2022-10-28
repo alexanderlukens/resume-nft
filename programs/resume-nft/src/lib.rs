@@ -4,14 +4,18 @@ use anchor_lang::system_program;
 
 use anchor_spl::{associated_token, token};
 
-use mpl_token_metadata::{instruction as token_instruction, ID as MPL_TOKEN_METADATA_ID};
+use mpl_token_metadata::{
+    instruction as token_instruction, state::Creator, ID as MPL_TOKEN_METADATA_ID,
+};
+
+mod constants;
+mod errors;
 
 declare_id!("7dGW6wNb8PjvBXazgTjWUAPoZJfU8aeDXsJW6xkETQDE");
 
 #[program]
 pub mod resume_nft {
     use super::*;
-
     pub fn mint(ctx: Context<MintNft>) -> Result<()> {
         // create mint account
         system_program::create_account(
@@ -65,6 +69,17 @@ pub mod resume_nft {
             1,
         )?;
         // create metadata account
+        let creator = Creator {
+            address: constants::CREATOR_PUB_KEY,
+            verified: true,
+            share: 100,
+        };
+
+        require!(
+            ctx.accounts.update_authority.key() == constants::CREATOR_PUB_KEY,
+            errors::MintingError::InvalidCreator
+        );
+
         invoke(
             &token_instruction::create_metadata_accounts_v3(
                 MPL_TOKEN_METADATA_ID,
@@ -72,11 +87,11 @@ pub mod resume_nft {
                 ctx.accounts.mint.key(),
                 ctx.accounts.mint_authority.key(),
                 ctx.accounts.mint_authority.key(),
-                ctx.accounts.mint_authority.key(),
+                constants::CREATOR_PUB_KEY,
                 "Alex Lukens' Resume".to_string(),
                 "ALEXLUKENS".to_string(),
                 "https://raw.githubusercontent.com/alexanderlukens/resume-nft/main/assets/resume.json".to_string(),
-                None,
+                Some(vec!(creator)),
                 1,
                 true,
                 true,
@@ -133,6 +148,8 @@ pub struct MintNft<'info> {
     pub token_account: UncheckedAccount<'info>,
     #[account(mut)]
     pub mint_authority: Signer<'info>,
+    #[account(mut)]
+    pub update_authority: Signer<'info>,
 
     pub rent: Sysvar<'info, Rent>,
     pub system_program: Program<'info, System>,
