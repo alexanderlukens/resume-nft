@@ -1,12 +1,15 @@
 import { FC } from 'react'
-import { WalletContext } from './contexts/WalletContext'
+import WalletConnectionContextProvider from './contexts/WalletConnectionContext'
+import WalletDetailContextProvider from './contexts/WalletDetailContext'
 import Index from './components/Index'
 
 const App: FC = () => {
   return (
-    <WalletContext>
-      <Index />
-    </WalletContext>
+    <WalletDetailContextProvider>
+      <WalletConnectionContextProvider>
+        <Index />
+      </WalletConnectionContextProvider>
+    </WalletDetailContextProvider>
   )
 }
 

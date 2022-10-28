@@ -6,7 +6,7 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import { clusterApiUrl } from '@solana/web3.js'
 require('@solana/wallet-adapter-react-ui/styles.css')
 
-export const WalletContext: FC<{ children: ReactNode }> = ({ children }) => {
+const WalletConnectionContext: FC<{ children: ReactNode }> = ({ children }) => {
   const network = WalletAdapterNetwork.Devnet
   const endpoint = useMemo(() => clusterApiUrl(network), [network])
 
@@ -35,3 +35,5 @@ export const WalletContext: FC<{ children: ReactNode }> = ({ children }) => {
     </ConnectionProvider>
   )
 }
+
+export default WalletConnectionContext
