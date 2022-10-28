@@ -2,14 +2,19 @@
 import { FC, useState } from 'react'
 import * as anchor from '@project-serum/anchor'
 import Button from '@mui/material/Button'
+// import LoadingButton from '@mui/lab/LoadingButton'
 
 import useToast from '../hooks/useToast'
+import useConfirmTransaction from '../hooks/useConfirmTransaction'
 import useMintProgram from '../hooks/useMintProgram'
+import useWalletDetailsContext from '../hooks/useWalletDetailsContext'
 import { UPDATE_AUTHORITY_PUB_KEY, TOKEN_METADATA_PROGRAM_ID } from '../utils'
 
 const MintButton: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const mintProgram = useMintProgram()
+  const { updateBalance } = useWalletDetailsContext()
+  const confirmTransaction = useConfirmTransaction()
 
   const { showSuccessToast, showErrorToast } = useToast()
 
@@ -46,7 +51,7 @@ const MintButton: FC = () => {
           TOKEN_METADATA_PROGRAM_ID
         ))[0]
 
-        await mintProgram.methods.mint()
+        const mintSignature = await mintProgram.methods.mint()
           .accounts({
             masterEdition: masterEditionAddress,
             metadata: metadataAddress,
@@ -58,6 +63,9 @@ const MintButton: FC = () => {
           })
           .signers([mintKeypair])
           .rpc()
+
+        await confirmTransaction(mintSignature)
+        await updateBalance()
 
         showSuccessToast('Mint Successful')
       } catch (e) {

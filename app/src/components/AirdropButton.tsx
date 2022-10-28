@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useState } from 'react'
 import Button from '@mui/material/Button'
+// import LoadingButton from '@mui/lab/LoadingButton'
 import Typography from '@mui/material/Typography'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
+import useConfirmTransaction from '../hooks/useConfirmTransaction'
 import useToast from '../hooks/useToast'
 import useWalletDetailsContext from '../hooks/useWalletDetailsContext'
 
@@ -13,6 +15,7 @@ const AirdropButton: FC = () => {
   const { connection } = useConnection()
   const wallet = useWallet()
   const { balance, updateBalance } = useWalletDetailsContext()
+  const confirmTransaction = useConfirmTransaction()
 
   const { showSuccessToast, showErrorToast } = useToast()
 
@@ -21,12 +24,7 @@ const AirdropButton: FC = () => {
       setLoading(true)
       try {
         const airdropSignature = await connection.requestAirdrop(wallet.publicKey, 2 * LAMPORTS_PER_SOL)
-        const latestBlockHash = await connection.getLatestBlockhash()
-        await connection.confirmTransaction({
-          blockhash: latestBlockHash.blockhash,
-          lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
-          signature: airdropSignature
-        })
+        await confirmTransaction(airdropSignature)
         await updateBalance()
         showSuccessToast('Airdrop Successful')
       } catch (e) {
