@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useEffect, useState } from 'react'
+import { Metaplex } from '@metaplex-foundation/js'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
@@ -26,7 +27,8 @@ const WalletDetailContextProvider: React.FC<Props> = ({ children }) => {
   const [balance, setBalance] = useState(0)
   // const [nfts, setNfts] = useState(0)
   const { connection } = useConnection()
-  const wallet = useWallet() || {}
+  const wallet = useWallet()
+  const metaplex = new Metaplex(connection)
 
   const updateBalance = async (): Promise<void> => {
     if (wallet.publicKey) {
@@ -38,7 +40,10 @@ const WalletDetailContextProvider: React.FC<Props> = ({ children }) => {
 
   const updateNfts = async (): Promise<void> => {
     if (wallet.publicKey) {
-      console.log('alex')
+      const nfts = await metaplex.nfts().findAllByOwner({
+        owner: wallet.publicKey
+      })
+      console.log(nfts)
     }
   }
 
