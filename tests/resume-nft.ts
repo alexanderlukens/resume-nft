@@ -13,6 +13,9 @@ describe("resume-nft", () => {
   const TOKEN_METADATA_PROGRAM_ID = new anchor.web3.PublicKey(
     "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
   );
+  const UPDATE_AUTHORITY_PUB_KEY = new anchor.web3.PublicKey(
+    "EqGBM2sVSVUQL5uSdpyzYG4Ud8Gzem7DvdKpz2x7Mi3D"
+  );
 
   it("Can mint!", async () => {
     const mintKeypair: anchor.web3.Keypair = anchor.web3.Keypair.generate();
@@ -48,7 +51,8 @@ describe("resume-nft", () => {
         mint: mintKeypair.publicKey,
         tokenAccount: tokenAddress,
         mintAuthority: wallet.publicKey,
-        tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID
+        tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID,
+        updateAuthority: UPDATE_AUTHORITY_PUB_KEY,
       })
       .signers([mintKeypair])
       .rpc();
