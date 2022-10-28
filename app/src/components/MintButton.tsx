@@ -5,7 +5,7 @@ import Button from '@mui/material/Button'
 
 import useToast from '../hooks/useToast'
 import useMintProgram from '../hooks/useMintProgram'
-import { TOKEN_METADATA_PROGRAM_ID } from '../utils'
+import { UPDATE_AUTHORITY_PUB_KEY, TOKEN_METADATA_PROGRAM_ID } from '../utils'
 
 const MintButton: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
@@ -53,7 +53,8 @@ const MintButton: FC = () => {
             mint: mintKeypair.publicKey,
             tokenAccount: tokenAddress,
             mintAuthority: mintProgram.provider.publicKey,
-            tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID
+            tokenMetadataProgram: TOKEN_METADATA_PROGRAM_ID,
+            updateAuthority: UPDATE_AUTHORITY_PUB_KEY
           })
           .signers([mintKeypair])
           .rpc()
