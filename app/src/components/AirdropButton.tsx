@@ -20,8 +20,14 @@ const AirdropButton: FC = () => {
     if (wallet.publicKey) {
       setLoading(true)
       try {
-        await connection.requestAirdrop(wallet.publicKey, 2 * LAMPORTS_PER_SOL)
-        setSolBalance(solBalance + 2)
+        const airdropSignature = await connection.requestAirdrop(wallet.publicKey, 2 * LAMPORTS_PER_SOL)
+        const latestBlockHash = await connection.getLatestBlockhash()
+        await connection.confirmTransaction({
+          blockhash: latestBlockHash.blockhash,
+          lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+          signature: airdropSignature
+        })
+        updateBalance()
         showSuccessToast('Airdrop Successful')
       } catch (e) {
         showErrorToast('Airdrop Failure. Please try again later.')
@@ -32,7 +38,7 @@ const AirdropButton: FC = () => {
 
   const updateBalance = async (): Promise<void> => {
     if (wallet.publicKey) {
-      let balance = await connection.getBalance(wallet.publicKey, 'processed')
+      let balance = await connection.getBalance(wallet.publicKey)
       balance = (Math.round(balance / LAMPORTS_PER_SOL * 100) / 100)
       setSolBalance(balance)
     }
