@@ -5,7 +5,6 @@
         "deploy-fe": "npm --prefix app/ run deploy"
     },
     "dependencies": {
-        "@mui/lab": "^5.0.0-alpha.105",
         "@project-serum/anchor": "^0.25.0"
     },
     "devDependencies": {

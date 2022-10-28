@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useState } from 'react'
 import Button from '@mui/material/Button'
-// import LoadingButton from '@mui/lab/LoadingButton'
 import Typography from '@mui/material/Typography'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'

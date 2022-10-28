@@ -2,7 +2,6 @@
 import { FC, useState } from 'react'
 import * as anchor from '@project-serum/anchor'
 import Button from '@mui/material/Button'
-// import LoadingButton from '@mui/lab/LoadingButton'
 
 import useToast from '../hooks/useToast'
 import useConfirmTransaction from '../hooks/useConfirmTransaction'
