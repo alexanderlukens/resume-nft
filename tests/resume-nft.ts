@@ -56,6 +56,5 @@ describe("resume-nft", () => {
       })
       .signers([mintKeypair])
       .rpc();
-    // console.log("Your transaction signature", tx);
   });
 });
