@@ -1,13 +1,11 @@
 {
   "files": {
-    "main.css": "/resume-nft/static/css/main.c630979b.css",
-    "main.js": "/resume-nft/static/js/main.b7fc7c54.js",
-    "index.html": "/resume-nft/index.html",
-    "main.c630979b.css.map": "/resume-nft/static/css/main.c630979b.css.map",
-    "main.b7fc7c54.js.map": "/resume-nft/static/js/main.b7fc7c54.js.map"
+    "main.css": "/resume-nft/static/css/main.33b3c966.css",
+    "main.js": "/resume-nft/static/js/main.fc45d21b.js",
+    "index.html": "/resume-nft/index.html"
   },
   "entrypoints": [
-    "static/css/main.c630979b.css",
-    "static/js/main.b7fc7c54.js"
+    "static/css/main.33b3c966.css",
+    "static/js/main.fc45d21b.js"
   ]
 }
