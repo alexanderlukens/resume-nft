@@ -12,7 +12,7 @@ import { UPDATE_AUTHORITY_PUB_KEY, TOKEN_METADATA_PROGRAM_ID } from '../utils'
 const MintButton: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const mintProgram = useMintProgram()
-  const { updateBalance } = useWalletDetailsContext()
+  const { updateBalance, updateNfts } = useWalletDetailsContext()
   const confirmTransaction = useConfirmTransaction()
 
   const { showSuccessToast, showErrorToast } = useToast()
@@ -67,6 +67,7 @@ const MintButton: FC = () => {
         await updateBalance()
 
         showSuccessToast('Mint Successful')
+        await updateNfts()
       } catch (e) {
         showErrorToast('Mint Failure.')
       }
