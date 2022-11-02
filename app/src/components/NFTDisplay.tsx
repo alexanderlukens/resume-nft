@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import ModalImage from 'react-modal-image'
 
@@ -15,6 +16,7 @@ const NFTDisplay: React.FC = () => {
               small={nft.imageUrl}
               large={nft.imageUrl}
             />
+            <Button>View on Solscan</Button>
           </Grid>
         )
       })}
