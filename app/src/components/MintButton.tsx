@@ -79,7 +79,7 @@ const MintButton: FC = () => {
       disabled={loading}
       loading={loading}
       onClick={onClick}
-      variant="outlined">
+      variant="contained">
       Mint
     </LoadingButton>
   )
