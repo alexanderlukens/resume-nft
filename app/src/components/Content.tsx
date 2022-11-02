@@ -10,10 +10,12 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import AirdropButton from './AirdropButton'
 import MintButton from './MintButton'
 import NFTDisplay from './NFTDisplay'
+import useWalletDetailsContext from '../hooks/useWalletDetailsContext'
 
 const Content: FC = () => {
   const wallet = useWallet()
   const { connected, connecting } = wallet
+  const { balance } = useWalletDetailsContext()
 
   if (connecting) {
     return (
@@ -35,36 +37,52 @@ const Content: FC = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          pt: 8,
-          pb: 6
-        }}
-      >
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
+      <Grid container justifyContent={'center'}>
+        <Box
+          sx={{
+            pt: 4,
+            pb: 6
+          }}
         >
-          Alex&apos;s Resume NFT
-        </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" paragraph>
-          Something short and leading about the collection below—its contents,
-          the creator, etc. Make it short and sweet, but not too short so folks
-          don&apos;t simply skip over it entirely.
-        </Typography>
-        <Stack
-          sx={{ pt: 4 }}
-          direction="row"
-          spacing={2}
-          justifyContent="center"
-        >
-          <MintButton />
-          <AirdropButton />
-        </Stack>
-      </Box>
+          <Typography
+            component="h1"
+            variant="h2"
+            align="center"
+            color="text.primary"
+          >
+            Alex&apos;s Resume NFT
+          </Typography>
+          <Typography variant="h5" align="center" color="text.secondary">
+            An NFT project running on Solana (devnet)
+          </Typography>
+          <Stack
+            sx={{ pt: 4 }}
+            justifyContent="center"
+          >
+            <Typography variant="body1" align="center" color="text.secondary">
+              Getting Started
+            </Typography>
+            <Typography variant="overline" align="left" color="text.secondary">
+              1. Connect Wallet
+            </Typography>
+            <Typography variant="overline" align="left" color="text.secondary">
+              2. Airdrop Sol if balance is below 2 (Your Balance: <Typography color="text.primary" component="span" sx={{ fontWeight: 'bold' }} variant="overline">{balance} SOL</Typography>)
+            </Typography>
+            <Typography variant="overline" align="left" color="text.secondary">
+              3. Click Mint
+            </Typography>
+          </Stack>
+          <Stack
+            sx={{ pt: 4 }}
+            direction="row"
+            spacing={2}
+            justifyContent="center"
+          >
+            <MintButton />
+            <AirdropButton />
+          </Stack>
+        </Box>
+      </Grid>
       <NFTDisplay />
     </>
   )

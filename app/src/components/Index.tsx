@@ -15,17 +15,19 @@ const Index: React.FC = () => {
       <Header />
       <Container maxWidth="lg" sx={{ minHeight: 'calc(100vh - 64px)' }}>
         <Grid container style={{ minHeight: 'calc(100vh - 64px)' }}>
-          <Content />
-          <ToastContainer
-            position="bottom-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            draggable={false}
-            pauseOnHover={false}
-            theme="colored"
-            limit={5}
-          />
+          <Grid item xs={12}>
+            <Content />
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              draggable={false}
+              pauseOnHover={false}
+              theme="colored"
+              limit={5}
+            />
+          </Grid>
         </Grid>
       </Container>
     </>
