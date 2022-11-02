@@ -62,7 +62,7 @@ const WalletDetailContextProvider: React.FC<Props> = ({ children }) => {
         const response = await fetch(nft.uri)
         const responseJSON = await response.json()
         const data = {
-          address: nft.address,
+          address: (nft as any).mintAddress,
           imageUrl: _.get(responseJSON, 'image')
         }
         return data
