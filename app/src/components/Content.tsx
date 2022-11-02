@@ -17,21 +17,25 @@ const Content: FC = () => {
   const { connected, connecting } = wallet
   const { balance } = useWalletDetailsContext()
 
+  let body
+  // eslint-disable-next-line no-constant-condition
   if (connecting) {
-    return (
+    body = (
       <Grid container alignItems="center" justifyContent="center">
-        <CircularProgress />
+        <CircularProgress size={130} thickness={2} />
       </Grid>
     )
-  }
-
-  if (!connected) {
-    return (
+  } else if (!connected) {
+    body = (
       <Grid container alignItems="center" justifyContent="center">
         <Grid item>
           Please connect wallet to continue
         </Grid>
       </Grid>
+    )
+  } else {
+    body = (
+      <NFTDisplay />
     )
   }
 
@@ -40,7 +44,7 @@ const Content: FC = () => {
       <Grid container justifyContent={'center'}>
         <Box
           sx={{
-            pt: 4,
+            pt: 1,
             pb: 6
           }}
         >
@@ -76,14 +80,14 @@ const Content: FC = () => {
             sx={{ pt: 4 }}
             direction="row"
             spacing={2}
-            justifyContent="center"
+            justifyContent="space-between"
           >
-            <MintButton />
             <AirdropButton />
+            <MintButton />
           </Stack>
         </Box>
       </Grid>
-      <NFTDisplay />
+      {body}
     </>
   )
 }

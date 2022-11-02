@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useState } from 'react'
 import LoadingButton from '@mui/lab/LoadingButton'
-import Typography from '@mui/material/Typography'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
@@ -13,10 +12,14 @@ const AirdropButton: FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const { connection } = useConnection()
   const wallet = useWallet()
-  const { balance, updateBalance } = useWalletDetailsContext()
+  const { updateBalance } = useWalletDetailsContext()
   const confirmTransaction = useConfirmTransaction()
 
   const { showSuccessToast, showErrorToast } = useToast()
+
+  if (!wallet.publicKey) {
+    return null
+  }
 
   const onClick = async (): Promise<void> => {
     if (wallet.publicKey) {
@@ -34,16 +37,13 @@ const AirdropButton: FC = () => {
   }
 
   return (
-    <>
-      <LoadingButton
-        disabled={loading}
-        loading={loading}
-        onClick={onClick}
-        variant="outlined">
-        Airdrop 2 Sol
-      </LoadingButton>
-      <Typography>{balance} SOL</Typography>
-    </>
+    <LoadingButton
+      disabled={loading}
+      loading={loading}
+      onClick={onClick}
+      variant="outlined">
+      Airdrop 2 Sol
+    </LoadingButton>
   )
 }
 
