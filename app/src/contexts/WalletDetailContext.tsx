@@ -44,6 +44,8 @@ const WalletDetailContextProvider: React.FC<Props> = ({ children }) => {
       let balance = await connection.getBalance(wallet.publicKey)
       balance = (Math.round(balance / LAMPORTS_PER_SOL * 100) / 100)
       setBalance(balance)
+    } else {
+      setBalance(0)
     }
   }
 
@@ -68,6 +70,8 @@ const WalletDetailContextProvider: React.FC<Props> = ({ children }) => {
         return data
       }))
       setNfts(nftData)
+    } else {
+      setNfts([])
     }
   }
 

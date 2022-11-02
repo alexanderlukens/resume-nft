@@ -29,7 +29,9 @@ const Content: FC = () => {
     body = (
       <Grid container alignItems="center" justifyContent="center">
         <Grid item>
-          Please connect wallet to continue
+          <Typography variant="h5" align="center" color="text.primary">
+            Please connect wallet to continue
+          </Typography>
         </Grid>
       </Grid>
     )
