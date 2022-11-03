@@ -18,7 +18,7 @@ const NFTDisplay: React.FC = () => {
 
   if (!nfts.length) {
     return (
-      <Grid container spacing={2} sx={{ mb: 3 }}>
+      <Grid container justifyContent="center" sx={{ mb: 3 }}>
         <Grid item>
           <Typography>You dont have Alex&apos;s Resume :(</Typography>
           <Typography>Click the mint button to get one!</Typography>
