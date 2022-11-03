@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/resume-nft/static/css/main.33b3c966.css",
-    "main.js": "/resume-nft/static/js/main.88f21621.js",
+    "main.js": "/resume-nft/static/js/main.2bb9752d.js",
     "index.html": "/resume-nft/index.html"
   },
   "entrypoints": [
     "static/css/main.33b3c966.css",
-    "static/js/main.88f21621.js"
+    "static/js/main.2bb9752d.js"
   ]
 }
