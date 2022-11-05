@@ -8,7 +8,7 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 const Header: FC = () => {
   return (
-    <AppBar color="secondary" position="static">
+    <AppBar position="static" sx={{ backgroundColor: '#16151E' }}>
       <Toolbar variant="dense">
         <Grid container alignItems="center" justifyContent={'space-between'} p={1}>
           <Grid item>
