@@ -1,10 +1,11 @@
 import { FC } from 'react'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Stack from '@mui/material/Stack'
-
 import CircularProgress from '@mui/material/CircularProgress'
 import Grid from '@mui/material/Grid'
+import Paper from '@mui/material/Paper'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+
 import { useWallet } from '@solana/wallet-adapter-react'
 
 import AirdropButton from './AirdropButton'
@@ -42,7 +43,7 @@ const Content: FC = () => {
   }
 
   return (
-    <>
+    <Paper>
       <Grid container justifyContent={'center'}>
         <Box
           sx={{
@@ -90,7 +91,7 @@ const Content: FC = () => {
         </Box>
       </Grid>
       {body}
-    </>
+    </Paper>
   )
 }
 
