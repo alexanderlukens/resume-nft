@@ -45,7 +45,7 @@ const Content: FC = () => {
   }
 
   return (
-    <Paper>
+    <Paper sx={{ my: 2, py: 2, minHeight: '95%' }}>
       <Container maxWidth="sm">
         <Box
           sx={{
